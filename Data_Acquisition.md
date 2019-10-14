@@ -1,10 +1,7 @@
 Acquiring NFL Data
 ================
 
-Fantasy football is very popular. This combined with the boom in
-availability of sports data has resulted in many statisticians and data
-scientists joining the hobby of trying to out-predict everyone else’s
-football projections. Here are some methods of acquiring data
+Here are some methods of acquiring data:
 
 ## 1\. nflscrapR
 
