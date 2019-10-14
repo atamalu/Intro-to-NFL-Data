@@ -1,7 +1,7 @@
 Acquiring NFL Data
 ================
 
-Here are some methods of acquiring data:
+Here are some methods of acquiring data
 
 ## 1\. nflscrapR
 
