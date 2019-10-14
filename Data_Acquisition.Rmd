@@ -1,0 +1,84 @@
+---
+title: "Acquiring NFL Data"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Fantasy football is very popular. This combined with the boom in availability of sports data has resulted in many statisticians and data scientists joining the hobby of trying to out-predict everyone else's football projections. Here are some methods of acquiring data
+
+## 1. nflscrapR
+
+The `nflscrapR` package is good for retrieving play-by-play data from the NFL game center. This is well-documented so I won't beat a dead horse. For working with SQL tables and nflscrapR, please see the `Storing and Loading Data in SQL` page
+
+## 2. NFL Fantasy API
+
+While nflscrapR is incredibly useful, we do not always want to work with information on a play-by-play basis. Because of this, I decided to write the function `get_nflapi_data` to get player-level data. 
+
+`get_nflapi_data` essentially works as one-size-fits-all way to gather data from the supported NFL Fantasy API webpages. There are 2 arguments:
+
+* `Data.type` - the type of data to grab via the NFL Fantasy API
+* `Params` - list of parameters for the query that can be found in the [NFL Fantasy API documentation](https://api.fantasy.nfl.com/v1/docs)
+  * Currently supported parameters are: "editordraftranks", "userdraftranks", "researchinfo", "news", "scoringleaders", "stats", "details", "advanced"
+
+```{r, message = FALSE}
+rm(list = ls()) # clear workspace
+source('Functions/API/get_nflapi_data.R') # load function & packages
+```
+
+As an example, let's say we want to get player news for 20 players
+
+```{r}
+params <- list(count = 20) # can also add any valid params to list
+
+df.news <- get_nflapi_data(Data.type = 'news', Params = params)
+glimpse(df.news)
+```
+
+The function actually specifies the `format = json` parameter if it is not included (only json is supported). Additionally, if the input for `Data.type` is not valid, an error is returned with the supported data types.
+
+If we want to get all of the data types, we can simply apply the function across parameter names in the data frame that is automatically loaded with the function: `data.info`
+
+```{r, warning=FALSE}
+d.types <- data.info$Type
+df.list <- sapply(d.types, get_nflapi_data)
+```
+
+##### Note
+
+The `details` data frame requires the parameter `playerId`
+
+## 3. Pro Football Reference
+
+Pro-Football Reference offers some pretty useful metrics that are hard to find elsewhere. 
+
+I currently have 2 functions written for scraping PFR. The code is basically identical between functions, except catered to the respective data type.
+
+### Defense vs. Position (Team)
+
+To get defense vs. position data, use `FR_def_vs_pos`. This has 2 arguments:
+* `Pos` - abbreviation of player position
+* `Year` - start year of NFL season
+
+```{r}
+source('Functions/FR/FR_def_vs_pos.R')
+
+df <- FR_def_vs_pos(Pos = 'TE', Year = 2019)
+glimpse(df)
+```
+
+### Season Fantasy Stats (Player)
+
+`FR_players_fantasy` gets fantasy-catered player statistics for the season. It has 2 arguments:
+
+* `Year` - the year of data to grab
+* `Per.game` - converts statistics to per-game
+
+```{r}
+source('Functions/FR/FR_players_fantasy.R')
+
+df <- FR_players_fantasy()
+glimpse(df)
+```

@@ -13,8 +13,6 @@ data.info <- data.frame(
                  TRUE, FALSE, FALSE)
 )
 
-Data.type = 'news'
-
 get_data <- function(Data.type, Params = list()){
   
   ##### Function breaks if json format isn't specified ---------------
