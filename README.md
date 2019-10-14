@@ -8,7 +8,7 @@ After looking across the web, I was unable to find an adequate amount of informa
 ## Setup
 
 * [Data Acquisition](https://github.com/atamalu/Intro-to-NFL-Data/blob/master/Data_Acquisition.md)
-* [Storing and Loading Data](https://github.com/atamalu/Intro-to-NFL-Data/blob/master/Storing_Loading.md)
+* [Storing and Loading Data with SQL](https://github.com/atamalu/Intro-to-NFL-Data/blob/master/Storing_Loading.md)
 
 ## Visualization
 * [Single Team](https://github.com/atamalu/Intro-to-NFL-Data/blob/master/Week_1_Exploration_Single.md)
