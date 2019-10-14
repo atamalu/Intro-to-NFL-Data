@@ -1,4 +1,4 @@
-# Intro-to-NFL-Data
+# Introduction to NFL Data
 An introduction to acquiring, manipulating, and visualizing NFL data; especially for fantasy football.
 
 Fantasy football is very popular. This combined with the boom in availability of sports has resulted in many statisticians and data scientists joining the hobby of trying to out-predict everyone else's football projections. 
